@@ -17,7 +17,7 @@ using ld = long double;
 
 vector < ll > dijkstra(vector < pair < int, int > > adj[], int n)
 {
-    vector < ll > dist(2 * n + 1, INT64_MAX) ;
+    vector < ll > dist(2 * n + 1, INT64_MAX), vis(n + 1) ;
     dist[1] = 0 ;
     priority_queue < pair < ll, int >, vector < pair < ll, int > >, greater < pair < ll, int > > > pq ;
     pq.push({0, 1}) ;
@@ -25,6 +25,8 @@ vector < ll > dijkstra(vector < pair < int, int > > adj[], int n)
     {
         int u = pq.top().second ;
         pq.pop() ;
+        if (vis[u]) continue ;
+        vis[u] = 1 ;
         for (auto x : adj[u])
         {
             int v = x.first ;
